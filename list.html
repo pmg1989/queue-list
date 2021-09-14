@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>queue-test</title>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        .flex-box {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .flex-item {
+            flex: 1;
+        }
+
+        ul li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div v-cloak>
+            <p>成功数：<span>{{ successCount }}</span></p>
+            <p>失败数：<span>{{ errorCount }}</span></p>
+            <div class="flex-box">
+                <div class="flex-item">
+                    <p>失败列表：</p>
+                    <ul>
+                        <li v-for="(error, index) in errorList" :key="error.cur">
+                            <p>
+                                {{index + 1}}. 耗时：{{ error.time }}ms
+                                - 完成项: {{ error.cur }}
+                                - 当前队列：{{ error.curBatchList }}
+                                - 队列数：{{ error.curBatchListCount }}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex-item">
+                    <p>成功列表：</p>
+                    <ul>
+                        <li v-for="(success, index) in successList" :key="success.cur">
+                            <p>
+                                {{index + 1}}. 耗时：{{ success.time }}ms
+                                - 完成项: {{ success.cur }}
+                                - 当前队列：{{ success.curBatchList }}
+                                - 队列数：{{ success.curBatchListCount }}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script src="./list.js"></script>
+</body>
+
+</html>
